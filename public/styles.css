@@ -386,31 +386,104 @@ footer { background:rgba(2,5,14,0.97); border-top:1px solid var(--border); paddi
 .footer-bot { display:flex; justify-content:center; max-width:1200px; margin:0 auto; border-top:1px solid rgba(0,200,255,0.12); padding-top:1rem; font-family:var(--fM); font-size:.6rem; color:var(--dim); flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+/* ── 1024px — tablets landscape ─────────────────────────────────── */
 @media(max-width:1024px) {
-  #nav { padding:1rem; height:auto; flex-wrap:wrap; }
-  .nav-links { width:100%; justify-content:center; flex-wrap:wrap; gap:1rem; }
+  .container { padding:0 1.5rem; }
   .game-hud { flex-direction:column; align-items:stretch; }
   .hud-f, .hud-r { width:100%; justify-content:space-between; }
   .hud-c { min-width:auto; }
   .touch-controls { display:flex; }
 }
+
+/* ── 768px — tablets portrait ───────────────────────────────────── */
 @media(max-width:768px) {
-  .nav-links { display:flex; }
-  .nav-right { width:100%; justify-content:center; margin-top:.5rem; }
-  .hero-stats { gap:1rem; padding:1rem; }
-  .stat-div { display:none; }
+  /* Nav: compact single row */
+  #nav { padding:.8rem 1rem; height:auto; }
+  .nav-brand { font-size:.75rem; }
+  .nav-links { gap:1.2rem; }
+  .nav-links a { font-size:.6rem; letter-spacing:.08em; }
+  .nav-right { gap:.8rem; }
+  #langBtn { font-size:.65rem; padding:.35rem .5rem; }
+  .btn-join { font-size:.6rem; padding:.45rem .9rem; }
+
+  /* Hero */
   .hero-title { font-size:2.4rem; }
-  .hero-sub { font-size:.95rem; }
-  .hero-btns { flex-direction:column; gap:.8rem; }
-  .game-wrap { width:100%; padding:0 1rem; }
-  .game-hud { padding:.8rem .9rem; }
-  .game-ctrl { padding:.8rem .9rem; }
-  .ctrl-help { text-align:center; font-size:.7rem; }
-  .game-buttons { justify-content:center; width:100%; }
-  .touch-controls { flex-direction:row; }
-  .touch-control-button { flex:1 1 100px; min-width:80px; }
+  .hero-sub { font-size:.9rem; }
+  .hero-btns { gap:.8rem; }
+  .hero-logo { width:90px; height:90px; }
+  .hero-stats { gap:.8rem; padding:.9rem 1.2rem; flex-wrap:wrap; }
+  .stat-div { display:none; }
+  .stat { min-width:70px; }
+  .stat-n { font-size:1.2rem; }
+
+  /* Container */
+  .container { padding:0 1rem; }
+  .sec-header h2 { font-size:2rem; }
+
+  /* Filter */
+  .disc-filter-wrap { margin:0 -1rem 2rem; padding:0 1rem; }
+  .disc-btn { padding:.7rem .9rem; font-size:.55rem; letter-spacing:.1em; }
+
+  /* Cards */
+  .cards { grid-template-columns:1fr; gap:1.2rem; }
+  .fighter-cards { grid-template-columns:1fr 1fr; }
+
+  /* Modal */
+  .modal-overlay { padding:0; align-items:flex-end; }
+  .modal-box { width:100%; border-radius:12px 12px 0 0; max-height:92vh; }
+  .modal-content { padding:1.5rem; }
+  .modal-close { top:.8rem; right:.8rem; }
+
+  /* Misc */
   .pricing { grid-template-columns:1fr; }
-  .footer-bot { flex-direction:column; }
+  .footer-bot { flex-direction:column; gap:.5rem; }
+}
+
+/* ── 480px — phones ─────────────────────────────────────────────── */
+@media(max-width:480px) {
+  /* Nav: stack logo + links */
+  #nav { flex-wrap:wrap; padding:.7rem 1rem; gap:.5rem; }
+  .nav-links { order:3; width:100%; justify-content:center; gap:.8rem; }
+  .nav-right { order:2; }
+  .nav-brand { display:none; } /* hide text, keep logo */
+
+  /* Hero */
+  .hero-title { font-size:1.9rem; letter-spacing:.05em; }
+  .hero-logo { width:70px; height:70px; }
+  .hero-btns { flex-direction:column; width:100%; align-items:stretch; }
+  .hero-btns a { text-align:center; justify-content:center; }
+  .hero-stats { gap:.5rem; padding:.8rem 1rem; }
+  .stat-n { font-size:1.1rem; }
+  .stat-l { font-size:.5rem; }
+
+  /* Filter: scroll horizontally */
+  .disc-filter-wrap { overflow-x:auto; overscroll-behavior-x:contain; }
+  .disc-filter { flex-wrap:nowrap; min-width:max-content; }
+  .disc-btn { padding:.65rem .8rem; white-space:nowrap; }
+
+  /* Cards single column */
+  .cards { grid-template-columns:1fr; }
+  .fighter-cards { grid-template-columns:1fr; }
+  .card { padding:1.2rem; }
+  .card-photo img { height:150px; }
+
+  /* Section headers */
+  .sec-header h2 { font-size:1.7rem; }
+  .sec-header p { font-size:.85rem; }
+  .sec-tag { font-size:.55rem; }
+
+  /* Ticker */
+  .ticker { font-size:.7rem; gap:2rem; }
+}
+
+/* ── 360px — small phones ───────────────────────────────────────── */
+@media(max-width:360px) {
+  .hero-title { font-size:1.6rem; }
+  .stat-n { font-size:1rem; }
+  .disc-btn { padding:.55rem .65rem; font-size:.5rem; }
+  .sec-header h2 { font-size:1.5rem; }
+  .modal-content { padding:1rem; }
+  .modal-body { font-size:.9rem; line-height:1.7; }
 }
 
 /* ── CARD PHOTO ──────────────────────────────────────────────────── */
