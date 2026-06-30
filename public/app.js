@@ -283,7 +283,6 @@ let _feedLoading = false;
 let _allPosts = null;  // cached from local JSON
 
 async function _fetchPosts(disc, page, perPage) {
-  // 1. Use local static JSON (always works, no Railway needed)
   if (!_allPosts) {
     try {
       const r = await fetch(_LOCAL_POSTS, { cache: 'no-cache' });
@@ -292,6 +291,8 @@ async function _fetchPosts(disc, page, perPage) {
     } catch { _allPosts = []; }
   }
   let posts = _allPosts;
+  // In EN mode: only show posts that have EN translation
+  if (_currentLang === 'en') posts = posts.filter(p => p.has_en);
   if (disc && disc !== 'all') posts = posts.filter(p => p.discipline === disc);
   const start = (page - 1) * perPage;
   return posts.slice(start, start + perPage);
