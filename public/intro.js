@@ -35,7 +35,7 @@
     const moveY  = logoRect.top  + logoRect.height / 2 - vH / 2;
 
     // Overlay shrinks to logo position
-    overlay.style.transition = 'transform 0.9s cubic-bezier(0.4,0,0.2,1), border-radius 0.9s ease, opacity 0.35s ease 0.65s';
+    overlay.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1), border-radius 0.5s ease, opacity 0.25s ease 0.35s';
     overlay.style.transformOrigin = 'center center';
     overlay.style.transform  = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
     overlay.style.borderRadius = '50%';
@@ -44,13 +44,13 @@
     // Nav logo appears as video arrives
     setTimeout(() => {
       if (navLogo) {
-        navLogo.style.transition = 'opacity 0.5s ease';
+        navLogo.style.transition = 'opacity 0.3s ease';
         navLogo.style.opacity = '1';
       }
-    }, 700);
+    }, 400);
 
     // Remove overlay
-    setTimeout(() => overlay.style.display = 'none', 1200);
+    setTimeout(() => overlay.style.display = 'none', 700);
 
     // Hero content fades in — set inline styles directly (reliable)
     setTimeout(() => {
@@ -98,24 +98,17 @@
   }
 
 
-  // ── Sound toggle ─────────────────────────────────────────────────
-  const soundBtn = document.getElementById('introSound');
-  if (introVideo && soundBtn) {
-    // Start muted (autoplay policy), user can unmute
+  // Always muted, play 1.8× faster — logo builds quickly, still looks premium
+  if (introVideo) {
     introVideo.muted = true;
-    soundBtn.textContent = '🔇 Sound OFF';
-    soundBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      introVideo.muted = !introVideo.muted;
-      soundBtn.textContent = introVideo.muted ? '🔇 Sound OFF' : '🔊 Sound ON';
-    });
+    introVideo.playbackRate = 1.8;
   }
 
   skipBtn?.addEventListener('click', skipIntro);
 
   if (introVideo) {
     introVideo.addEventListener('ended', startTransition);
-    const safe = setTimeout(startTransition, 7000);
+    const safe = setTimeout(startTransition, 3000);
     introVideo.addEventListener('ended', () => clearTimeout(safe));
     introVideo.play().catch(skipIntro);
   } else {

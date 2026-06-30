@@ -227,6 +227,18 @@ document.querySelectorAll('#langMenu button').forEach(btn => {
   });
 });
 
+// ── Mobile performance: disable heavy canvas animations on small screens ──────
+// globalCanvas hex animation is beautiful but GPU-intensive — skip on mobile
+if (window.innerWidth < 768 || /Mobi|Android|iPad|iPhone/i.test(navigator.userAgent)) {
+  const gc = document.getElementById('globalCanvas');
+  if (gc) gc.style.display = 'none';
+  // Also disable custom cursor on touch devices
+  const cur = document.getElementById('cursor');
+  const curD = document.getElementById('cursorDot');
+  if (cur) cur.style.display = 'none';
+  if (curD) curD.style.display = 'none';
+}
+
 // ── Card builder ─────────────────────────────────────────────────────────────
 const _DISC_EMOJI = {
   mma: '🥋', boxing: '🥊', kickboxing: '🦵',
