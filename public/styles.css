@@ -87,9 +87,10 @@ body { font-family:var(--fB); background:var(--void); color:var(--silver); curso
 .nav-links { display:flex; gap:2rem; }
 .nav-links a {
   font-family:var(--fM); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--dim); text-decoration:none; transition:color .2s;
+  color:var(--silver); text-decoration:none; transition:color .2s;
 }
 .nav-links a:hover { color:var(--cyan); }
+.nav-links a.active { color:var(--cyan); }
 
 .nav-right { display:flex; align-items:center; gap:1.2rem; }
 
