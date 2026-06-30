@@ -116,8 +116,8 @@ window._triggerPageAnims = function () {
     // ── LAYER 1: Ambient deep glow (drifts slowly) ──────────────────
     const gx=W*.5+Math.cos(t*.4)*W*.13, gy=H*.38+Math.sin(t*.28)*H*.09;
     const amb=ctx.createRadialGradient(gx,gy,0,gx,gy,Math.min(W,H)*.52);
-    amb.addColorStop(0,'rgba(0,50,160,0.14)');
-    amb.addColorStop(.6,'rgba(0,16,65,0.05)');
+    amb.addColorStop(0,'rgba(0,50,160,0.28)');
+    amb.addColorStop(.6,'rgba(0,16,65,0.10)');
     amb.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=amb; ctx.fillRect(0,0,W,H);
 
@@ -130,7 +130,7 @@ window._triggerPageAnims = function () {
       const dx=(cx/W-.5), dy=(cy/H-.45);
       const dist=Math.sqrt(dx*dx+dy*dy*.6);
       // Vary fill intensity with depth: center slightly lighter (foreground)
-      const baseOpacity = 0.015 + dist*0.04;
+      const baseOpacity = 0.035 + dist*0.07;
 
       // Radial gradient inside hex: bright top → dark edges (convex highlight)
       const fillR = ctx.createRadialGradient(cx, cy-S*.2, 0, cx, cy, S*.92);
@@ -151,13 +151,13 @@ window._triggerPageAnims = function () {
     }
 
     // ── LAYER 3: Edge shimmer wave ────────────────────────────────────
-    const baseAlpha = 0.052;
+    const baseAlpha = 0.10;
     for (let i=0; i<edges.length; i++) {
       const e = edges[i];
       // Diagonal wave traveling across screen
       const phase = (e.mx/W)*6 - (e.my/H)*3 + t;
       const wave = (Math.sin(phase)+1)/2;
-      const shimmer = Math.pow(Math.max(0,wave-0.62)/0.38, 3.0);
+      const shimmer = Math.pow(Math.max(0,wave-0.55)/0.45, 2.5);
       const totalAlpha = baseAlpha + shimmer*0.24;
       if (totalAlpha < 0.03) continue;
       const lineW = 0.75 + shimmer*1.5;
