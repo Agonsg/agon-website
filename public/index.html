@@ -4,394 +4,204 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AGON | COMBAT SPORTS — Combat Intelligence Platform</title>
-  <meta name="description" content="Expert combat sports analysis. MMA, Boxing, Kickboxing, Muay Thai. 8 languages. AI-powered fight intelligence."/>
+  <meta name="description" content="Expert combat sports analysis. MMA, Boxing, Kickboxing, Muay Thai. 8 languages."/>
   <meta property="og:title" content="AGON | COMBAT SPORTS"/>
-  <meta property="og:description" content="Combat Intelligence Platform. Expert analysis in 8 languages."/>
   <meta property="og:image" content="/assets/hero-bg.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
   <link rel="icon" type="image/png" href="/assets/logo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/styles.css?v=44"/>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════ NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-logo">
-    <img src="/assets/logo.png" alt="AGON" class="nav-logo-img"/>
-    <span class="nav-brand">AGON <span class="nav-pipe">|</span> COMBAT SPORTS</span>
-  </div>
-  <div class="nav-center">
-    <a href="#intel" class="nav-link" data-i18n="nav_intel">Intel Feed</a>
-    <a href="#fighters" class="nav-link" data-i18n="nav_fighters">Fighters</a>
-    <a href="#arena" class="nav-link" data-i18n="nav_arena">Arena</a>
-    <a href="#premium" class="nav-link" data-i18n="nav_premium">Premium</a>
+<!-- Global animated hex background -->
+<canvas id="globalCanvas"></canvas>
+
+<!-- ═══════ INTRO: video fullscreen → shrinks into nav logo ═══════ -->
+<div id="introOverlay">
+  <video id="introVideo" autoplay playsinline preload="auto">
+    <source src="/assets/hero.mp4" type="video/mp4"/>
+  </video>
+  <div class="intro-scanlines"></div>
+  <button id="introSkip">SKIP ▶</button>
+  <button id="introSound" class="intro-sound-btn">🔊 Sound ON</button>
+</div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav">
+  <a href="#" class="nav-logo-link">
+    <img src="/assets/logo.png" alt="AGON" id="navLogo"/>
+    <span class="nav-brand">AGON <span class="pipe">|</span> COMBAT SPORTS</span>
+  </a>
+  <div class="nav-links">
+    <a href="#feed" data-i18n="nav_feed">News Feed</a>
+    <a href="#analysis" data-i18n="nav_analysis">Analysis</a>
+    <a href="#fighters" data-i18n="nav_fighters">Fighters</a>
   </div>
   <div class="nav-right">
-    <div class="lang-switcher" id="langSwitcher">
-      <button class="lang-btn active" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="ru">RU</button>
-      <button class="lang-btn" data-lang="es">ES</button>
-      <button class="lang-btn" data-lang="de">DE</button>
-      <button class="lang-btn" data-lang="fr">FR</button>
+    <div class="lang-wrap">
+      <button id="langBtn" type="button">🇬🇧 EN ▾</button>
+      <div id="langMenu">
+        <button type="button" data-lang="en" data-flag="🇬🇧">🇬🇧 EN</button>
+        <button type="button" data-lang="ru" data-flag="🇷🇺">🇷🇺 RU</button>
+      </div>
     </div>
-    <a href="https://t.me/agoncombat" target="_blank" class="nav-cta" data-i18n="nav_join">Join Channel</a>
+    <a id="joinChannelBtn"
+       href="https://t.me/agoncombat_en"
+       target="_blank" rel="noopener noreferrer"
+       class="btn-join"
+       data-i18n="nav_join"
+       data-href-en="https://t.me/agoncombat_en"
+       data-href-ru="https://t.me/agoncombat">JOIN CHANNEL</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════ HERO -->
-<section class="hero" id="hero">
-  <!-- Video background -->
-  <div class="hero-video-wrap">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="/assets/hero.mp4" type="video/mp4"/>
-    </video>
-    <div class="hero-video-overlay"></div>
-  </div>
-
-  <!-- Hex particle canvas -->
-  <canvas class="hex-canvas" id="hexCanvas"></canvas>
-
-  <!-- Scanlines -->
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
   <div class="scanlines"></div>
-
-  <!-- Content -->
-  <div class="hero-content">
-    <div class="hero-intro-line" data-anim="fade-up" style="--delay:0.2s">
+  <div id="heroContent">
+    <div class="hero-eyebrow">
       <span class="dot"></span>
-      <span class="intro-text" data-i18n="hero_intro">COMBAT INTELLIGENCE PLATFORM</span>
+      <span data-i18n="hero_eyebrow">COMBAT INTELLIGENCE PLATFORM</span>
       <span class="dot"></span>
     </div>
-
-    <div class="hero-logo-wrap" data-anim="logo-slam" style="--delay:0.5s">
-      <img src="/assets/logo.png" alt="AGON" class="hero-logo-img"/>
-    </div>
-
-    <h1 class="hero-title glitch" data-text="AGON | COMBAT SPORTS" data-anim="fade-up" style="--delay:0.8s">
-      AGON <span class="hero-pipe">|</span> COMBAT SPORTS
-    </h1>
-
-    <p class="hero-sub" data-anim="fade-up" style="--delay:1.1s" data-i18n="hero_sub">
-      Expert fight analysis · 8 languages · AI-powered intelligence
-    </p>
-
-    <div class="hero-btns" data-anim="fade-up" style="--delay:1.4s">
-      <a href="https://t.me/agoncombat" target="_blank" class="btn btn-primary" data-i18n="hero_btn1">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-        <span data-i18n="hero_btn1">Telegram Channel</span>
+    <img src="/assets/logo.png" alt="AGON" class="hero-logo" id="heroLogoImg"/>
+    <h1 class="hero-title">AGON <span class="pipe">|</span> COMBAT SPORTS</h1>
+    <p class="hero-sub" data-i18n="hero_sub">Expert fight analysis · 8 languages · AI-powered intelligence</p>
+    <div class="hero-btns">
+      <a href="https://t.me/agoncombat" target="_blank" rel="noopener noreferrer" class="btn-primary" data-i18n="hero_btn1">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+        Telegram Channel
       </a>
-      <a href="#intel" class="btn btn-outline" data-i18n="hero_btn2">
-        <span data-i18n="hero_btn2">Read Intel Feed</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-      </a>
+      <a href="#feed" class="btn-outline" data-i18n="hero_read_feed">Read Intel Feed ↗</a>
     </div>
-
-    <!-- Stats strip -->
-    <div class="hero-stats" data-anim="fade-up" style="--delay:1.7s">
-      <div class="hero-stat">
-        <span class="stat-num" data-count="12646">0</span>
-        <span class="stat-label" data-i18n="stat_fighters">Fighters</span>
-      </div>
-      <div class="hero-stat-div"></div>
-      <div class="hero-stat">
-        <span class="stat-num" data-count="612">0</span>
-        <span class="stat-label" data-i18n="stat_sources">Sources</span>
-      </div>
-      <div class="hero-stat-div"></div>
-      <div class="hero-stat">
-        <span class="stat-num" data-count="8">0</span>
-        <span class="stat-label" data-i18n="stat_languages">Languages</span>
-      </div>
-      <div class="hero-stat-div"></div>
-      <div class="hero-stat">
-        <span class="stat-num" data-count="300">0</span>
-        <span class="stat-label">+ Knowledge Chunks</span>
-      </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-n" id="stat-posts" data-count="950">0</span><span class="stat-l" data-i18n="stat_posts">Posts Published</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-n" id="stat-sources" data-count="948">0</span><span class="stat-l" data-i18n="stat_sources">Sources 24/7</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-n" id="stat-promotions" data-count="234">0</span><span class="stat-l" data-i18n="stat_promotions">Promotions</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-n" id="stat-countries" data-count="30">0</span><span class="stat-l" data-i18n="stat_countries">Countries</span></div>
     </div>
   </div>
-
-  <!-- Discipline ticker -->
   <div class="ticker-wrap">
     <div class="ticker">
-      <span>MMA</span><span class="ticker-dot">◆</span>
-      <span>BOXING</span><span class="ticker-dot">◆</span>
-      <span>KICKBOXING</span><span class="ticker-dot">◆</span>
-      <span>MUAY THAI</span><span class="ticker-dot">◆</span>
-      <span>BARE KNUCKLE</span><span class="ticker-dot">◆</span>
-      <span>GRAPPLING</span><span class="ticker-dot">◆</span>
-      <span>BJJ</span><span class="ticker-dot">◆</span>
-      <span>MMA</span><span class="ticker-dot">◆</span>
-      <span>BOXING</span><span class="ticker-dot">◆</span>
-      <span>KICKBOXING</span><span class="ticker-dot">◆</span>
-      <span>MUAY THAI</span><span class="ticker-dot">◆</span>
-      <span>BARE KNUCKLE</span><span class="ticker-dot">◆</span>
-      <span>GRAPPLING</span><span class="ticker-dot">◆</span>
-      <span>BJJ</span><span class="ticker-dot">◆</span>
+      <span>MMA</span><span class="td">◆</span><span>BOXING</span><span class="td">◆</span><span>KICKBOXING</span><span class="td">◆</span><span>MUAY THAI</span><span class="td">◆</span><span>BARE KNUCKLE</span><span class="td">◆</span><span>GRAPPLING</span><span class="td">◆</span><span>MMA</span><span class="td">◆</span><span>BOXING</span><span class="td">◆</span><span>KICKBOXING</span><span class="td">◆</span><span>MUAY THAI</span><span class="td">◆</span><span>BARE KNUCKLE</span><span class="td">◆</span><span>GRAPPLING</span><span class="td">◆</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ INTEL FEED -->
-<section class="section" id="intel">
+<!-- ═══════ NEWS FEED ═══════ -->
+<section id="feed" class="section">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag" data-i18n="section_intel_tag">LATEST INTELLIGENCE</div>
-      <h2 class="section-title" data-i18n="section_intel_title">Combat Intel Feed</h2>
-      <p class="section-sub" data-i18n="section_intel_sub">Expert analysis updated 24/7 across 8 disciplines and regions</p>
+    <div class="sec-header">
+      <div class="sec-tag" data-i18n="feed_tag">LATEST NEWS</div>
+      <h2 data-i18n="feed_title">News Feed</h2>
+      <p data-i18n="feed_sub">Results, breaking news and reports — 24/7 across 6 combat sports disciplines</p>
     </div>
-
-    <div class="intel-grid" id="intelGrid">
-      <!-- Cards injected by JS -->
-      <article class="intel-card" data-anim="fade-up" style="--delay:0.1s">
-        <div class="card-discipline mma">🥋 MMA</div>
-        <div class="card-event">ONE SAMURAI 1 · Tokyo · Apr 29, 2026</div>
-        <h3 class="card-title">Takeru остановил Rodtang в пятом. И ушёл чемпионом.</h3>
-        <p class="card-excerpt">Interim ONE Flyweight Kickboxing World Title. TKO Round 5, 2:22. Takeru Segawa завершил карьеру победой над одним из самых непримиримых соперников в истории ONE.</p>
-        <div class="card-footer">
-          <span class="card-fighters">Takeru Segawa · Rodtang</span>
-          <a href="https://t.me/agoncombat" class="card-link" target="_blank">Read full →</a>
-        </div>
-      </article>
-
-      <article class="intel-card" data-anim="fade-up" style="--delay:0.2s">
-        <div class="card-discipline mma">🥋 MMA</div>
-        <div class="card-event">ONE SAMURAI 1 · Tokyo · Apr 29, 2026</div>
-        <h3 class="card-title">Один локоть. Один момент. Смена власти во Flyweight MMA.</h3>
-        <p class="card-excerpt">Avazbek Kholmirzaev стал новым ONE Flyweight MMA Champion, остановив Yuya Wakamatsu spinning back elbow во втором раунде.</p>
-        <div class="card-footer">
-          <span class="card-fighters">Kholmirzaev · Wakamatsu</span>
-          <a href="https://t.me/agoncombat" class="card-link" target="_blank">Read full →</a>
-        </div>
-      </article>
-
-      <article class="intel-card featured" data-anim="fade-up" style="--delay:0.3s">
-        <div class="card-discipline" style="background:linear-gradient(135deg,#d4a843,#a8792a)">🏆 ANALYSIS</div>
-        <div class="card-event">Fighter Intelligence</div>
-        <h3 class="card-title">Alex Pereira идёт за третьим поясом. Два в UFC, два в GLORY.</h3>
-        <p class="card-excerpt">13-3 · UFC MW Champion · UFC LHW Champion · GLORY Two-Division Champion. Теперь — временный пояс тяжёлого веса против Ciryl Gane.</p>
-        <div class="card-footer">
-          <span class="card-fighters">Alex Pereira · Ciryl Gane</span>
-          <a href="https://t.me/agoncombat" class="card-link" target="_blank">Read full →</a>
-        </div>
-      </article>
+    <div class="disc-filter-wrap">
+      <div class="disc-filter">
+        <button type="button" class="disc-btn active" data-disc="all" data-i18n="filter_all">All</button>
+        <button type="button" class="disc-btn" data-disc="mma">MMA</button>
+        <button type="button" class="disc-btn" data-disc="boxing">Boxing</button>
+        <button type="button" class="disc-btn" data-disc="kickboxing">Kickboxing</button>
+        <button type="button" class="disc-btn" data-disc="muaythai">Muay Thai</button>
+        <button type="button" class="disc-btn" data-disc="bareknuckle">Bare Knuckle</button>
+        <button type="button" class="disc-btn" data-disc="grappling">Grappling</button>
+      </div>
     </div>
-
-    <div class="section-cta">
-      <a href="https://t.me/agoncombat" target="_blank" class="btn btn-primary" data-i18n="intel_cta">
-        View All Posts on Telegram
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-      </a>
+    <div class="cards" id="feed-cards">
+      <div class="feed-loading">Loading latest posts...</div>
+    </div>
+    <div class="intel-cta">
+      <button type="button" class="btn-outline" id="loadMoreBtn" data-i18n="load_more">Load More</button>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ FIGHTERS -->
-<section class="section section-dark" id="fighters">
-  <div class="hex-bg"></div>
+<!-- ═══════ FIGHTERS ═══════ -->
+<section id="fighters" class="section section-dark">
+  <div class="hex-bg-pattern"></div>
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag" data-i18n="section_fighters_tag">FIGHTER DATABASE</div>
-      <h2 class="section-title" data-i18n="section_fighters_title">Fighter Intelligence</h2>
-      <p class="section-sub" data-i18n="section_fighters_sub">12,646 fighters · Records · H2H · Tactics · Vulnerability analysis</p>
+    <div class="sec-header">
+      <div class="sec-tag" data-i18n="fighters_tag">FIGHTER INTELLIGENCE</div>
+      <h2 data-i18n="fighters_title">Search Any Fighter</h2>
+      <p data-i18n="fighters_sub">Find AGON coverage on any athlete across all disciplines</p>
     </div>
-
-    <div class="search-box" data-anim="fade-up">
-      <div class="search-input-wrap">
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" class="search-input" id="searchInput" placeholder="Search any fighter..."/>
-        <button class="search-btn" id="searchBtn" data-i18n="search_btn">Analyze</button>
-      </div>
-      <p class="search-hint" data-i18n="search_hint">Try: Khamzat Chimaev · Islam Makhachev · Alex Pereira · Rodtang</p>
+    <div class="search-box">
+      <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="Search any fighter... (Khamzat Chimaev, Islam Makhachev...)"/>
+      <button type="button" id="searchBtn" data-i18n="search_btn">Analyze →</button>
     </div>
-
-    <!-- Fighter showcase cards -->
-    <div class="fighter-showcase" data-anim="fade-up">
-      <div class="fighter-card">
-        <div class="fighter-flag">🇷🇺🇸🇪</div>
-        <div class="fighter-name">Khamzat Chimaev</div>
-        <div class="fighter-record">13-0 · UFC Middleweight</div>
-        <div class="fighter-tags">
-          <span class="tag">Wrestling</span>
-          <span class="tag">Pressure</span>
-          <span class="tag">Chechnya</span>
-        </div>
-        <a href="https://t.me/agoncombatbot?start=stats_Khamzat_Chimaev" class="fighter-cta" data-i18n="fighter_cta">Full Intel Report →</a>
+    <div class="fighter-cards">
+      <div class="f-card f-card--clickable" data-fighter="Khamzat Chimaev">
+        <div class="f-flag">🇷🇺🇸🇪</div>
+        <div class="f-name">Khamzat Chimaev</div>
+        <div class="f-rec">13-0 · UFC Middleweight</div>
+        <span class="f-link" data-i18n="f_all_posts">All Posts →</span>
       </div>
-      <div class="fighter-card">
-        <div class="fighter-flag">🇧🇷</div>
-        <div class="fighter-name">Alex Pereira</div>
-        <div class="fighter-record">13-3 · UFC LHW Champion</div>
-        <div class="fighter-tags">
-          <span class="tag">Kickboxing</span>
-          <span class="tag">Left Hook</span>
-          <span class="tag">GLORY</span>
-        </div>
-        <a href="https://t.me/agoncombatbot?start=stats_Alex_Pereira" class="fighter-cta" data-i18n="fighter_cta">Full Intel Report →</a>
+      <div class="f-card f-card--clickable" data-fighter="Alex Pereira">
+        <div class="f-flag">🇧🇷</div>
+        <div class="f-name">Alex Pereira</div>
+        <div class="f-rec">13-3 · UFC LHW Champion</div>
+        <span class="f-link" data-i18n="f_all_posts">All Posts →</span>
       </div>
-      <div class="fighter-card">
-        <div class="fighter-flag">🇦🇿</div>
-        <div class="fighter-name">Islam Makhachev</div>
-        <div class="fighter-record">26-1 · UFC Lightweight Champion</div>
-        <div class="fighter-tags">
-          <span class="tag">Sambo</span>
-          <span class="tag">Dagestan</span>
-          <span class="tag">RNC</span>
-        </div>
-        <a href="https://t.me/agoncombatbot?start=stats_Islam_Makhachev" class="fighter-cta" data-i18n="fighter_cta">Full Intel Report →</a>
+      <div class="f-card f-card--clickable" data-fighter="Islam Makhachev">
+        <div class="f-flag">🇦🇿</div>
+        <div class="f-name">Islam Makhachev</div>
+        <div class="f-rec">26-1 · UFC LW Champion</div>
+        <span class="f-link" data-i18n="f_all_posts">All Posts →</span>
       </div>
-    </div>
-
-    <div class="bot-promo" data-anim="fade-up">
-      <div class="bot-promo-icon">⚡</div>
-      <div class="bot-promo-text">
-        <strong data-i18n="bot_promo_title">Fighter Intelligence Bot</strong>
-        <span data-i18n="bot_promo_sub">Full report via Telegram · 50 Stars · Instant delivery</span>
-      </div>
-      <a href="https://t.me/agoncombatbot" target="_blank" class="btn btn-outline" data-i18n="bot_promo_btn">Open Bot</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ ARENA GAME -->
-<section class="section" id="arena">
+<!-- ═══════ ANALYSIS ═══════ -->
+<section id="analysis" class="section section-dark">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">AGON ARENA</div>
-      <h2 class="section-title">Combat Simulator</h2>
-      <p class="section-sub" data-i18n="arena_sub">Test your reflexes in the AGON Arena. Challenge a friend or face the AI.</p>
+    <div class="sec-header">
+      <div class="sec-tag" data-i18n="analysis_tag">EDITORIAL DEPTH</div>
+      <h2 data-i18n="analysis_title">Analysis & Stories</h2>
+      <p data-i18n="analysis_sub">Fight History · Fighter profiles · Deep reads · AGON editorial view</p>
     </div>
-
-    <div class="game-wrap" data-anim="fade-up">
-      <div class="game-hud">
-        <div class="hud-fighter">
-          <span class="hud-name" id="p1Name">FIGHTER 1</span>
-          <div class="health-bar-wrap">
-            <div class="health-bar" id="p1Health"></div>
-          </div>
-          <span class="hud-hp" id="p1Hp">100</span>
-        </div>
-        <div class="hud-center">
-          <div class="hud-round" id="roundDisplay">RD 1</div>
-          <div class="hud-timer" id="timerDisplay">99</div>
-        </div>
-        <div class="hud-fighter hud-right">
-          <span class="hud-hp" id="p2Hp">100</span>
-          <div class="health-bar-wrap">
-            <div class="health-bar p2" id="p2Health"></div>
-          </div>
-          <span class="hud-name" id="p2Name">FIGHTER 2</span>
-        </div>
-      </div>
-
-      <canvas id="gameCanvas" width="800" height="420"></canvas>
-
-      <div class="game-controls">
-        <div class="controls-p1">
-          <strong>P1:</strong> ← → Move · Z Punch · X Kick · C Special
-        </div>
-        <div class="game-btns">
-          <button class="btn btn-outline btn-sm" id="startBtn">▶ START</button>
-          <button class="btn btn-outline btn-sm" id="vsAiBtn">VS AI</button>
-        </div>
-        <div class="controls-p2">
-          <strong>P2:</strong> A D Move · J Punch · K Kick · L Special
-        </div>
-      </div>
+    <div class="cards" id="analysis-cards">
+      <div class="feed-loading">Loading...</div>
+    </div>
+    <div class="intel-cta">
+      <button type="button" class="btn-outline" id="loadMoreAnalysisBtn">Load More</button>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════ PREMIUM -->
-<section class="section section-dark" id="premium">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">MEMBERSHIP</div>
-      <h2 class="section-title" data-i18n="premium_title">Premium Intelligence</h2>
-      <p class="section-sub" data-i18n="premium_sub">Access deeper layers of combat intelligence</p>
-    </div>
-
-    <div class="pricing-grid" data-anim="fade-up">
-      <div class="pricing-card">
-        <div class="pricing-tier">FREE</div>
-        <div class="pricing-price">$0</div>
-        <ul class="pricing-features">
-          <li>✓ <span data-i18n="free_f1">Telegram channel access</span></li>
-          <li>✓ <span data-i18n="free_f2">Daily combat analysis</span></li>
-          <li>✓ <span data-i18n="free_f3">8 languages</span></li>
-          <li>✗ <span data-i18n="free_f4">Fighter Intel Reports</span></li>
-          <li>✗ <span data-i18n="free_f5">H2H deep analysis</span></li>
-        </ul>
-        <a href="https://t.me/agoncombat" target="_blank" class="btn btn-outline" data-i18n="free_cta">Join Channel</a>
-      </div>
-
-      <div class="pricing-card featured">
-        <div class="pricing-badge" data-i18n="popular">POPULAR</div>
-        <div class="pricing-tier">FIGHTER</div>
-        <div class="pricing-price">50 ⭐ <span class="per-report">/ report</span></div>
-        <ul class="pricing-features">
-          <li>✓ <span data-i18n="fighter_f1">Full Fighter Intelligence Report</span></li>
-          <li>✓ <span data-i18n="fighter_f2">Record · H2H · Tactics</span></li>
-          <li>✓ <span data-i18n="fighter_f3">Vulnerability analysis</span></li>
-          <li>✓ <span data-i18n="fighter_f4">Training camp & style</span></li>
-          <li>✓ <span data-i18n="fighter_f5">Regional intelligence</span></li>
-        </ul>
-        <a href="https://t.me/agoncombatbot" target="_blank" class="btn btn-primary" data-i18n="fighter_cta2">Get Report via Bot</a>
-      </div>
-
-      <div class="pricing-card">
-        <div class="pricing-tier">CHAMPION</div>
-        <div class="pricing-price">Coming <span class="per-report">Soon</span></div>
-        <ul class="pricing-features">
-          <li>✓ <span data-i18n="champ_f1">Pre-fight tactical packages</span></li>
-          <li>✓ <span data-i18n="champ_f2">Event coverage bundles</span></li>
-          <li>✓ <span data-i18n="champ_f3">H2H full history</span></li>
-          <li>✓ <span data-i18n="champ_f4">Betting intelligence</span></li>
-          <li>✓ <span data-i18n="champ_f5">API access</span></li>
-        </ul>
-        <button class="btn btn-outline" disabled data-i18n="champ_cta">Notify Me</button>
+<!-- ═══════ FOOTER ═══════ -->
+<!-- ═══════ ARTICLE MODAL ═══════ -->
+<div id="articleModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <img id="modalPhoto" class="modal-photo modal-photo--hidden" src="" alt="">
+    <div class="modal-content">
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <a href="https://t.me/agoncombat" target="_blank" rel="noopener noreferrer" class="btn-outline">Follow @agoncombat →</a>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════════════════════════════════════════════════════ FOOTER -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <img src="/assets/logo.png" alt="AGON" class="footer-logo"/>
-      <span class="footer-brand-name">AGON | COMBAT SPORTS</span>
-    </div>
-    <div class="footer-social">
-      <a href="https://t.me/agoncombat" target="_blank" class="social-btn telegram">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-        @agoncombat
-      </a>
-      <a href="https://twitter.com/agoncombat" target="_blank" class="social-btn twitter">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        @agoncombat
-      </a>
-    </div>
-  </div>
-  <div class="footer-links">
-    <a href="#intel">Intel Feed</a>
-    <a href="#fighters">Fighters</a>
-    <a href="#arena">Arena</a>
-    <a href="#premium">Premium</a>
-    <a href="https://t.me/agoncombatbot">Bot</a>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 CHEVORA OŪ. All rights reserved. Powered by S.Čepinoga.</span>
-    <span class="footer-disciplines">MMA · Boxing · Kickboxing · Muay Thai · Grappling · BJJ</span>
+<footer>
+  <div class="footer-bot">
+    <span>© 2026 AGON | COMBAT SPORTS. All rights reserved.</span>
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════════════ CURSOR -->
-<div class="custom-cursor" id="cursor"></div>
-<div class="custom-cursor-dot" id="cursorDot"></div>
+<div id="cursor"></div>
+<div id="cursorDot"></div>
 
-<script src="/app.js"></script>
-<script src="/game.js"></script>
-<script src="/i18n.js"></script>
+<script src="/intro.js?v=44"></script>
+<script src="/app.js?v=44"></script>
+<script src="/game.js?v=44"></script>
+<script src="/i18n.js?v=44"></script>
 </body>
 </html>
