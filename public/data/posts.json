@@ -14,7 +14,8 @@
       "text_preview": "Не стоит продавать ACBJJ 21 как обычный вечер “звезд MMA на ковре”. Это слишком простое объяснение. Здесь интереснее другое: бойцов вытаскивают из привычной среды и оставляют с одним вопросом, насколь",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFIGpFHgaQGMB6ryHLcXw-P4Tixn3cAAKJDmsbpb4oUk6TaruxTQ7_AQADAgADeQADPAQ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1311",
@@ -29,7 +30,8 @@
       "text_preview": "Cage Warriors 209 пройдёт 4 июля на Vertu Arena в Ньюкасле.\n\nУ Cage Warriors давно своя функция в европейском MMA. Это не лига для пустой афиши. Здесь бойцов сортируют по пригодности к следующему уров",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFH2pFEIRc-hjMH3Ijk6IrOQGKQhcnAAL0D2sbYLwoUo1gCt6ImwABLAEAAwIAA3kAAzwE.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "Cage Warriors"
     },
     {
       "id": "1310",
@@ -44,7 +46,8 @@
       "text_preview": "ARES FC 42 пройдёт 3 июля на Adidas Arena в Париже.\n\nЭто не самый громкий турнир недели по глобальной афише, но для европейского MMA он важен. ARES давно работает как французская витрина для бойцов, к",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFHmpFAkZQYYvn0cvXwOtA732kUv8OAALxD2sbYLwoUmAyB9Vc27umAQADAgADeQADPAQ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1308",
@@ -89,7 +92,8 @@
       "text_preview": "В единоборствах есть секунда, которую нельзя показать в статистике.\n\nБойцы уже в ринге или клетке. Камеры включены. Зал ждёт. До первого удара остаётся совсем мало. Именно здесь голос ринг-анонсера пе",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFGmpE16Ioag7tGEI-oYOJxxgqujqUAAIaD2sbYLwgUmNpQRPiHSRVAQADAgADeQADPAQ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1305",
@@ -104,7 +108,8 @@
       "text_preview": "Magomed “Chanco” Zaynukov наконец получил дату дебюта в UFC.\n\n25 июля на UFC Abu Dhabi он встретится с Damian Rzepecki в lightweight - 155 lbs / 70.3 kg. Формально это бой двух дебютантов. По сути - р",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFGWpEwwABpcHF7vDtxjXKG4D40QEDOQAC9w5rG2C8IFJwBhDw0FPuSwEAAwIAA3kAAzwE.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1304",
@@ -151,7 +156,8 @@
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFFmpEBs7ZdCLtz0Rm.jpg",
       "has_photo": true,
       "has_en": true,
-      "content_category": "analysis"
+      "content_category": "analysis",
+      "organization": "UFC"
     },
     {
       "id": "1301",
@@ -166,7 +172,8 @@
       "text_preview": "Кулачный рынок уже давно не пустая территория.\n\nBKFC строит американскую модель: арены, подписка, приложение, рейтинги, узнаваемые бойцы и собственная bare-knuckle идентичность. BKB / BYB делает ставк",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFFWpD57W_rZK7TD1c.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "BKFC"
     },
     {
       "id": "1300",
@@ -182,7 +189,8 @@
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFFGpDotkBEFbaIeOA.jpg",
       "has_photo": true,
       "has_en": true,
-      "content_category": "analysis"
+      "content_category": "analysis",
+      "organization": "BKFC"
     },
     {
       "id": "1299",
@@ -197,7 +205,8 @@
       "text_preview": "История с Herb Dean уже вышла за пределы обычного спора после боя.\n\nДа, стартовой точкой стала реакция Alex Pereira после поражения от Ciryl Gane на UFC Freedom 250. Pereira утверждает, что в финишной",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFE2pDmPpo8SLrpKWe.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1298",
@@ -213,7 +222,8 @@
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFEmpDk_m-dQPzQ5Yq.jpg",
       "has_photo": true,
       "has_en": true,
-      "content_category": "analysis"
+      "content_category": "analysis",
+      "organization": "BKFC"
     },
     {
       "id": "1297",
@@ -228,7 +238,8 @@
       "text_preview": "История вокруг Floyd Mayweather сейчас выглядит шумной, но её лучше читать без таблоидной эмоции.\n\nЕсть три линии.\n\nПервая - иск Mayweather на $175 млн против бывшего инвестиционного менеджера. В мате",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFEWpDk_kLcTJR2fJ6.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1296",
@@ -243,7 +254,8 @@
       "text_preview": "Если первую публикацию по RWS 200 нужно было делать про масштаб события, то здесь главное другое: кто реально вынес из Rajadamnern статус.\n\nПервый акцент: Koki Osaki.\n\nЧемпион RISE вышел против Chaito",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFEGpDhgnCsNq2dGyk.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1295",
@@ -258,7 +270,8 @@
       "text_preview": "RWS 200 был важен не только цифрой в названии. Юбилейный 200-й ивент Rajadamnern World Series показал, что у Rajadamnern Stadium остается собственная линия в мировом Muay Thai.\n\nПока ONE Championship ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFD2pDf7oOUFbH7jgJ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "Rajadamnern Stadium"
     },
     {
       "id": "1294",
@@ -273,7 +286,8 @@
       "text_preview": "PFL San Diego дал не самый шумный, но очень полезный вечер для понимания текущей иерархии лиги.\n\nГлавный результат: AJ McKee победил Salamat Isbulaev единогласным решением, 30-27 x3, в полулегком весе",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFDmpDd6ckQbSJnWdc.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "PFL"
     },
     {
       "id": "1293",
@@ -349,7 +363,8 @@
       "text_preview": "BKFC Fight Night Hammond дал сразу два показательных результата для рынка bare-knuckle.\n\nВ главном бою Gregoris Cisneros остановил Cameron VanCamp в первом раунде на 1:49.\n\nЭто важная победа не только",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFCWpC0nllVqXdWOWB.jpg",
       "has_photo": true,
-      "has_en": false
+      "has_en": false,
+      "organization": "BKFC"
     },
     {
       "id": "1288",
@@ -364,7 +379,8 @@
       "text_preview": "У ONE Championship получилась неделя, где Lumpinee снова показал свою настоящую роль. Не красивая декорация для стрима, а место, где бойца быстро снимают с рекламной упаковки и оставляют один на один ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFCGpCs1ttIIjK1FxI.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "ONE Championship"
     },
     {
       "id": "1287",
@@ -379,7 +395,8 @@
       "text_preview": "прошел самый неприятный тест в своей карьере UFC.\n\nБой прошел 27 июня 2026 на турнире UFC Fight Night: Fiziev vs Torres в National Gymnastics Arena, Baku, Azerbaijan. В ко-мейне Shara победил Michel P",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFB2pCraHKIOmOrhfr.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1286",
@@ -394,7 +411,8 @@
       "text_preview": "Rafael Fiziev победил Manuel Torres в главном бою UFC Baku - KO на 0:15 второго раунда.\n\nЕсли смотреть только финиш, картина слишком простая: разворот, удар ногой, падение, добивание. Но бой был не пр",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFBmpCrBUBhBxda8m8.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1285",
@@ -439,7 +457,8 @@
       "text_preview": "Lumpinee сегодня снова в центре ударной сцены.\n\nУ ONE Championship сразу два сильных блока по Muay Thai: ONE Friday Fights 160 и The Inner Circle 20. Для канала это хороший повод уйти от бесконечного ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFA2o-W0UCpm5-y7Lc.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "ONE Championship"
     },
     {
       "id": "1282",
@@ -469,7 +488,8 @@
       "text_preview": "Rafael Fiziev сделал вес перед UFC Baku - 156 lbs / 70.8 kg.\n\nManuel Torres тоже прошёл лимит - 156 lbs / 70.8 kg.\n\nНо весы здесь не дают ответа. Они просто подтверждают, что бой состоится.\n\nКуда инте",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFAWo-O9IK8KmFg6WS.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1280",
@@ -484,7 +504,8 @@
       "text_preview": "Sean Strickland говорит, что смотрит на возвращение в декабре. Для чемпиона UFC в middleweight - 185 lbs / 83.9 kg это нормальный срок: восстановиться, не развалить форму, спокойно выйти на первую защ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIFAAFqPjeel405M0ef.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1279",
@@ -514,7 +535,8 @@
       "text_preview": "сообщил, что вернулся к полноценным тренировкам и уже ведёт переговоры с UFC по реваншу с Ciryl Gane.\n\nДля heavyweight / 265 lbs / 120.2 kg это не рядовая новость из зала. После травмы глаза и останов",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE_mo-KYKgOqLVIP5b.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1277",
@@ -544,7 +566,8 @@
       "text_preview": "стал единственным представителем MMA среди номинантов ESPY 2026 в категории Best Fighter.\n\nСписок показательный: рядом с ним — Теренс Кроуфорд, Габриэла Фундора и Кларесса Шилдс. То есть в этом году M",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE_Go-IMzc4LJHzibN.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1275",
@@ -619,7 +642,8 @@
       "text_preview": "KSW И OKTAGON: ЕВРОПЕЙСКАЯ МОДЕЛЬ ЛОКАЛЬНОЙ ЭКОНОМИКИ\n\nЕвропейский MMA нельзя анализировать как уменьшенную копию UFC.\n\nУ KSW и OKTAGON другая задача: построить плотный региональный продукт, где арена",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE92o9bOz7koUy4VyS.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KSW"
     },
     {
       "id": "1270",
@@ -634,7 +658,8 @@
       "text_preview": "Линия Tom Aspinall vs Ciryl Gane снова стала центральной для heavyweight UFC.\n\nФормально бой еще нужно ждать в официальном анонсе. Но спортивная логика уже почти не оставляет обходного пути: Aspinall ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE9mo9UP5GllUbn7Bb.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1269",
@@ -649,7 +674,8 @@
       "text_preview": "Тренер по физподготовке Ilia Topuria - Jesus Gallo - дал короткий апдейт по его восстановлению после поражения от Justin Gaethje.\n\nГлавная фраза тренера: “Day by day, he already looks like an entirely",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE9Wo9UJWpjJZsUC3V.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1268",
@@ -664,7 +690,8 @@
       "text_preview": "Историю Zuffa Boxing нужно читать не по отдельным скандалам, а по линии давления на старую систему.\n\nСначала был британский фронт: BOXXER и Ben Shalom заявили претензии к Zuffa Boxing из-за бойцов, ко",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE9Go9Qv-gED0h5Bsb.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1267",
@@ -679,7 +706,8 @@
       "text_preview": "UFC снова вернулась к теме перчаток Trevor Wittman.\n\nПо данным MMA Fighting, Wittman рассказал, что Hunter Campbell из UFC несколько недель назад снова вышел на контакт по поводу его дизайна. Dana Whi",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE82o9NRJZI6mkW2L_.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1266",
@@ -694,7 +722,8 @@
       "text_preview": "Aspen Ladd подписала multi-fight deal с BKB Bare Knuckle Boxing.\n\nДля меня это не сенсация, но точный сигнал по рынку.\n\nLadd прошла UFC, PFL, Bellator, Invicta FC. В MMA у нее рекорд 12-5 и опыт проти",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE8mo9MnbtotMP6ik1.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "BKB Bare Knuckle Boxing"
     },
     {
       "id": "1265",
@@ -709,7 +738,8 @@
       "text_preview": "23 июля в Abu Dhabi, на Space42 Arena, пройдет UAE Warriors 72.\n\nГлавный бой - Asaf “Honey Badger” Chopurov vs Reece “Lightning” McLaren за пояс UAE Warriors Bantamweight Championship в 135 lbs / 61.2",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE8Wo9J3qQaYU7wJYC.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1264",
@@ -724,7 +754,8 @@
       "text_preview": "22 августа в Tampa, Florida, на Benchmark International Arena, пройдет PFL Tampa.\n\nГлавный бой - Cris Cyborg vs Ketlen Vieira за титул PFL в женском featherweight 145 lbs / 65.8 kg.\n\nДля Cyborg это об",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE8Go9J2zqE1uo4HW0.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "PFL"
     },
     {
       "id": "1263",
@@ -739,7 +770,8 @@
       "text_preview": "26 июня в Bangkok, на Lumpinee Stadium, пройдет ONE Fight Night 44: Jarvis vs Rungrawee II.\n\nВ одном из боев карда Charlie Guest дебютирует в ONE Championship против Sam Fitzgerald в featherweight Mua",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE72o9CyYW5hHZS1Ll.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1262",
@@ -769,7 +801,8 @@
       "text_preview": "24 июня в Lima, на Centro de Convenciones Zentro, прошел Inka 58.\n\nГлавный бой - Ian Escuza vs Octavio “El Negro” Lopez за титул IFC в featherweight 145 lbs / 65.8 kg.\n\nПо открытым базам перед боем Es",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE7Wo8_J4v8RxsGHRP.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1260",
@@ -784,7 +817,8 @@
       "text_preview": "26 июня в Belfast, на Waterfront Hall, пройдет вечер Conlan Boxing: The Last Dance.\n\nТрансляция заявлена на DAZN - 2:00pm ET / 11:00am PT.\n\nГлавная линия вечера - Padraig “Pody” McCrory. Само название",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE7Go87o0dXt9lTMGi.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "LFA"
     },
     {
       "id": "1259",
@@ -799,7 +833,8 @@
       "text_preview": "26 июня в São Paulo, на Varanda Estaiada, пройдет Bison Kombat 8.\n\nMain card заявлен на UFC Fight Pass с 6:00pm ET / 3:00pm PT. По афише в Бразилии основной кард начинается в 21:00 BRT, prelims - в 19",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE62o85749JiydomMl.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1258",
@@ -814,7 +849,8 @@
       "text_preview": "26 июня Legacy Fighting Alliance проведет LFA 236 в Phoenix, Arizona, на Arizona Financial Theatre.\n\nГлавный бой - Aziz Osorbek Uulu vs Eduardo Torres в bantamweight 135 lbs / 61.2 kg.\n\nMain card в СШ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE6mo82hj1k-Njt7DQ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "Legacy Fighting Alliance"
     },
     {
       "id": "1257",
@@ -829,7 +865,8 @@
       "text_preview": "По сообщению Bloody Elbow, Ian Machado Garry подписал соглашение с Matchroom Talent Agency Эдди Хирна и стал еще одним бойцом UFC в этой новой управленческой линии после Tom Aspinall.\n\nЗдесь важно сра",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE6Wo8y68vwuxaSapO.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1256",
@@ -860,7 +897,8 @@
       "text_preview": "PFL И ONE CHAMPIONSHIP: ПОЧЕМУ БОЛЬШИЕ ДЕНЬГИ НЕ ГАРАНТИРУЮТ ВЛАСТЬ НАД РЫНКОМ\n\nПосле UFC главный вопрос индустрии звучит просто:\n\nкто способен построить реальную альтернативу?\n\nЧаще всего называют PF",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE52o8G1cgI2XYlaLJ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "ONE Championship"
     },
     {
       "id": "1254",
@@ -890,7 +928,8 @@
       "text_preview": "26 июня 2026 года Cage Fury Fighting Championships впервые зайдет в Illinois: CFFC 156 пройдет в Rockford, на Hard Rock Live / Hard Rock Casino Rockford.\n\nПо официальной билетной странице: двери - 17:",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE5Wo79xj_Ac6TmIhV.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1252",
@@ -905,7 +944,8 @@
       "text_preview": "27 июня 2026 года в Bangkok, на Rajadamnern Stadium, пройдет RWS 200.\n\nПо афише: двери открываются в 18:00 ICT. Prelims - 19:10 ICT / 14:10 CEST. Main card - 20:05 ICT / 15:05 CEST. Международная тран",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE5Go73gdblxeHVq_h.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1251",
@@ -935,7 +975,8 @@
       "text_preview": "26 июня в Bangkok, на Lumpinee Stadium, в рамках The Inner Circle 20, Stamp Fairtex проведет бой против Cynthia Flores по правилам Muay Thai в атомном весе 115 lbs / 52.2 kg.\n\nЭто не MMA и не обычный ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE4mo7k6uZXpgaLL7o.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1249",
@@ -950,7 +991,8 @@
       "text_preview": "История вокруг Ronda Rousey vs Gina Carano, Jake Paul, Netflix и UFC Freedom 250 не должна читаться как дешевый спор о том, кто набрал больше просмотров.\n\nЭто более серьезный сигнал.\n\nВ единоборствах ",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE4Wo7gOmW4JL1-mCi.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1248",
@@ -981,7 +1023,8 @@
       "text_preview": "БОЕЦ КАК АКТИВ: КТО СОЗДАЕТ ЦЕННОСТЬ И КТО ЕЕ КОНТРОЛИРУЕТ\n\nВ единоборствах есть один жесткий парадокс.\n\nГлавную ценность создает боец.\n\nНо почти всегда он находится внутри системы, где ключевые права",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE32o6yp23aozl6ZMl.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1246",
@@ -996,7 +1039,8 @@
       "text_preview": "пройдет 29 августа 2026 года на Fenway Park в Boston, Massachusetts.\n\nЭто не просто новая дата в календаре BKFC. Это важный индустриальный сигнал.\n\nFenway Park - домашняя арена Boston Red Sox и одна и",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE3mo6sTAHKh4U-Ic7.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "BKFC"
     },
     {
       "id": "1245",
@@ -1026,7 +1070,8 @@
       "text_preview": "27 июня 2026 года в Utrecht, Netherlands, пройдет турнир World Fighting League.\n\nГлавный бой вечера - Christian Baya vs Jay Overmeer за титул World Fighting League -75 kg Championship. Лимит - 165,3 l",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE3Go6hPx_bh5In9SJ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "World Fighting League"
     },
     {
       "id": "1243",
@@ -1056,7 +1101,8 @@
       "text_preview": "28 июня 2026 года RISE 199 пройдёт на Korakuen Hall, Tokyo, Japan.\n\nГлавный бой - Yuya vs Samo Petje за вакантный титул RISE Middleweight Championship в лимите 154,3 lbs / 70 кг.\n\nДля японского кикбок",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE2mo6buYK8zmWVw60.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "Colosseum Tournament"
     },
     {
       "id": "1241",
@@ -1071,7 +1117,8 @@
       "text_preview": "26 июня 2026 года Colosseum Tournament 50 пройдёт на Suceava Fortress, Suceava, Romania.\n\nЭто не просто юбилейный номер в календаре. Для румынского кикбоксинга такие турниры имеют практическое значени",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE2Wo6PscPPTYLf_NQ.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "Colosseum Tournament"
     },
     {
       "id": "1240",
@@ -1086,7 +1133,8 @@
       "text_preview": "UFC и Meta представили Meta UFC Rankings. На первый взгляд это обновление таблицы рейтингов. На деле - более серьёзный шаг: UFC переводит один из самых чувствительных механизмов индустрии из зоны меди",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE2Go6PUBAHbV9ig4j.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1239",
@@ -1101,7 +1149,8 @@
       "text_preview": "26 июня 2026 года BKFC Fight Night Hammond: VanCamp vs Cisneros пройдёт в Hammond, Indiana, USA.\n\nГлавный бой - Cameron VanCamp vs Gregoris Cisneros в welterweight - 165 lbs / 74,8 кг.\n\nПосле UFC, PFL",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE12o6Nj8spWDp6Bx5.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "BKFC"
     },
     {
       "id": "1238",
@@ -1116,7 +1165,8 @@
       "text_preview": "27 июня 2026 года Cage Warriors 208 пройдёт в Indigo at The O2, London, England.\n\nГлавный бой - Nik Bagley vs Aiden Lee за титул Cage Warriors Featherweight Championship в лимите 145 lbs / 65,8 кг. Co",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE1mo6L4vAD54t_4DY.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "Cage Warriors"
     },
     {
       "id": "1237",
@@ -1147,7 +1197,8 @@
       "text_preview": "МЕДИАПРАВА И ПЛАТФОРМЫ: ПОЧЕМУ ПОДПИСКА МЕНЯЕТ ЭКОНОМИКУ БОЯ\n\nРаньше большой бой продавался как отдельное событие.\n\nЗритель покупал вечер: pay-per-view, билет в зал, трансляцию, один главный кард, оди",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIE1Go5eIZ56vj3t5tj.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1235",
@@ -1222,7 +1273,8 @@
       "text_preview": "26 июня 2026 года ONE Fight Night 44 пройдёт на Lumpinee Stadium, Bangkok, Thailand. Для Европы это ночь на 27 июня - 03:00 CEST.\n\nГлавный бой - George Jarvis vs Rungrawee Sitsongpeenong II в lightwei",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEz2o5XzkTQe3qr482.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1230",
@@ -1237,7 +1289,8 @@
       "text_preview": "26 июня 2026 года The Inner Circle 20 пройдёт в пятничном блоке ONE на Lumpinee Stadium, Bangkok, Thailand.\n\nГлавный бой этого турнира - Asadula Imangazaliev vs Aslamjon Ortikov за титул ONE Flyweight",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEzmo5UuYQOYHtJK7n.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1229",
@@ -1252,7 +1305,8 @@
       "text_preview": "27 июня 2026 года на Pechanga Arena San Diego, San Diego, California, USA, в рамках PFL San Diego пройдёт бой Khasan Magomedsharipov vs Jordan Weems в featherweight - 145 lbs / 65,8 кг.\n\nЗдесь важно с",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEzWo5RpTihbbZPzqG.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "PFL"
     },
     {
       "id": "1228",
@@ -1267,7 +1321,8 @@
       "text_preview": "27 июня 2026 года PFL San Diego пройдёт на Pechanga Arena San Diego, San Diego, California, USA.\n\nГлавный бой турнира - A.J. McKee vs Salamat Isbulaev в featherweight - 145 lbs / 65,8 кг.\n\nДля A.J. Mc",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEzGo5Qss-jTtsCPnD.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "PFL"
     },
     {
       "id": "1227",
@@ -1282,7 +1337,8 @@
       "text_preview": "27 июня 2026 года UFC Fight Night: Fiziev vs Torres пройдёт на National Gymnastics Arena, Baku, Azerbaijan.\n\nГлавный бой - Rafael Fiziev vs Manuel Torres в lightweight - 155 lbs / 70,3 кг.\n\nДля Fiziev",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEy2o5OsE6mUzZJvCz.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "UFC"
     },
     {
       "id": "1226",
@@ -1312,7 +1368,8 @@
       "text_preview": "прошёл 20 июня 2026 года в Limassol, Cyprus, на площадке The Warehouse.\n\nГлавная линия вечера - Jahfaro Gezius vs Loukas Tryfonos по правилам K-1 Rules. Gezius победил техническим нокаутом и продолжил",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEyWo5GxsH4jITvwWD.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1224",
@@ -1327,7 +1384,8 @@
       "text_preview": "Каждый понедельник фиксируем события недели для аудитории AGON | COMBAT SPORTS. В календаре: бокс, MMA, Muay Thai, кикбоксинг и кулачные бои.\n\n24 июня - Boxing\n\nLewis Crocker vs Liam Paro\nPat Rafter A",
       "photo_url": "/assets/photos/AgACAgQAAyEFAATVbOwBAAIEyGo5D3Hu9mJAeLew.jpg",
       "has_photo": true,
-      "has_en": true
+      "has_en": true,
+      "organization": "KOK"
     },
     {
       "id": "1223",
