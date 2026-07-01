@@ -332,7 +332,10 @@ async function _fetchPosts(disc, page, perPage) {
     posts = posts.filter(p => {
       const [y, m, d] = (p.published_at || '').slice(0, 10).split('-');
       if (!y) return false;
-      if (_feedYear && y !== _feedYear) return false;
+      // Year matches either when AGON published the post that year, or when
+      // the post's own text is ABOUT that year (a history piece on PRIDE
+      // 2006 should surface under "2006" even though AGON posted it in 2026).
+      if (_feedYear && y !== _feedYear && !(p.years_mentioned || []).includes(_feedYear)) return false;
       if (_feedMonth && m !== _feedMonth) return false;
       if (_feedDay && d !== _feedDay) return false;
       return true;
@@ -609,13 +612,10 @@ document.getElementById('filterDateBtn')?.addEventListener('click', async () => 
   const yearMenu = document.getElementById('dateFilterYear')?.querySelector('.csel-menu');
   if (yearMenu && yearMenu.children.length <= 1) {
     const manifest = await _ensureManifest();
-    const yearSet = new Set();
-    manifest.pages.forEach(p => {
-      const lo = parseInt((p.min_date || '').slice(0, 4), 10);
-      const hi = parseInt((p.max_date || '').slice(0, 4), 10);
-      if (lo && hi) for (let y = lo; y <= hi; y++) yearSet.add(String(y));
-    });
-    [...yearSet].sort().reverse().forEach(y => _cselAddOption('dateFilterYear', y, y));
+    // Includes both years AGON published in and years its posts are ABOUT
+    // (e.g. a history piece on 1996) — manifest.years is authoritative,
+    // computed server-side from published_at + each post's years_mentioned.
+    [...(manifest.years || [])].sort().reverse().forEach(y => _cselAddOption('dateFilterYear', y, y));
   }
 });
 document.getElementById('dateFilterApply')?.addEventListener('click', () => {
