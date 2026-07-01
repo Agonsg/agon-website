@@ -363,11 +363,14 @@ const _PLACEHOLDER_POSTS = {
   },
 };
 
-function _openModal(postId) {
+function _openModal(postId, { pushUrl = true } = {}) {
   _modal.classList.add('open');
   _modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   _modal.scrollTop = 0;
+  if (pushUrl) {
+    try { history.pushState({ postId: String(postId) }, '', `/post/${postId}`); } catch (_) {}
+  }
 
   const post = (_allPosts || []).find(p => p.id === String(postId));
   const modalPhoto = document.getElementById('modalPhoto');
@@ -397,13 +400,16 @@ function _openModal(postId) {
   }
 }
 
-function _closeModal() {
+function _closeModal({ pushUrl = true } = {}) {
   _modal.classList.remove('open');
   _modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (pushUrl && /^\/post\//.test(location.pathname)) {
+    try { history.pushState({}, '', '/'); } catch (_) {}
+  }
 }
 
-_modalClose?.addEventListener('click', _closeModal);
+_modalClose?.addEventListener('click', () => _closeModal());
 _modal?.addEventListener('click', e => { if (e.target === _modal) _closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') _closeModal(); });
 
@@ -411,6 +417,27 @@ document.addEventListener('click', e => {
   const card = e.target.closest('.card--clickable');
   if (card && card.dataset.postId) _openModal(card.dataset.postId);
 });
+
+window.addEventListener('popstate', () => {
+  const m = location.pathname.match(/^\/post\/([^/]+)/);
+  if (m) _openModal(m[1], { pushUrl: false });
+  else _closeModal({ pushUrl: false });
+});
+
+// ── Deep link: /post/<id> opens that post directly (used by Telegram notifications)
+(async function _openDeepLinkedPost() {
+  const m = location.pathname.match(/^\/post\/([^/]+)/);
+  if (!m) return;
+  const postId = m[1];
+  if (!_allPosts) {
+    try {
+      const r = await fetch(_LOCAL_POSTS, { cache: 'no-cache' });
+      const d = await r.json();
+      _allPosts = d.posts || [];
+    } catch { _allPosts = []; }
+  }
+  _openModal(postId, { pushUrl: false });
+})();
 
 // ── Discipline filter
 document.querySelectorAll('.disc-btn').forEach(btn => {

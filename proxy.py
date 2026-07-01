@@ -21,6 +21,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path.startswith("/api/"):
             self._proxy()
+        elif self.path.startswith("/post/"):
+            # SPA deep link: app.js reads the id from the URL and opens that post's modal
+            self.path = "/index.html"
+            super().do_GET()
         else:
             super().do_GET()
 
