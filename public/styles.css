@@ -241,7 +241,7 @@ body { font-family:var(--fB); background:var(--void); color:var(--silver); curso
 .sec-header p { color:var(--dim); max-width:480px; margin:0 auto; }
 
 /* ── INTEL CARDS ─────────────────────────────────────────────────── */
-.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,380px)); gap:1.5rem; }
+.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
 .card {
   background:var(--card); border:1px solid var(--border);
   padding:1.8rem; border-radius:3px; transition:all .3s; position:relative; overflow:hidden;
