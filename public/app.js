@@ -4,7 +4,7 @@
 const _API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? '' : 'https://agon-fighter-production.up.railway.app';
 const _STATS_API = _API + '/api/stats';
-const _LOCAL_POSTS = '/data/posts.json';
+const _ARCHIVE_MANIFEST = '/data/posts/manifest.json';
 const _LOCAL_STATS = '/data/stats.json';
 
 // ── Current language (set by i18n switcher)
@@ -37,8 +37,9 @@ function _animateCount(el, target) {
 }
 
 (async function loadLiveStats() {
-  // Try local static data first, then Railway API
-  for (const url of [_LOCAL_STATS, _STATS_API]) {
+  // Try the live Railway API first so counts don't go stale; the static
+  // snapshot is only a fallback for when the API is unreachable.
+  for (const url of [_STATS_API, _LOCAL_STATS]) {
     try {
       const res = await fetch(url, { cache: 'no-cache' });
       if (!res.ok) continue;
@@ -217,6 +218,8 @@ document.querySelectorAll('#langMenu button').forEach(btn => {
     langMenu?.classList.remove('open');
     document.documentElement.setAttribute('data-lang', lang);
     if (window.i18n) window.i18n.setLang(lang);
+    _monthOptionsRelabel();
+    _cselRelabelDefaults();
     _currentLang = lang;
     // Update JOIN CHANNEL href based on language
     const joinBtn = document.getElementById('joinChannelBtn');
@@ -278,22 +281,64 @@ function _buildCard(post, featured = false) {
 // ── Live feed loader ──────────────────────────────────────────────────────────
 let _feedPage = 1;
 let _feedDisc = 'all';
+let _feedDay = '';    // '01'-'31', '' = any day
+let _feedMonth = '';  // '01'-'12', '' = any month
+let _feedYear = '';   // 'YYYY', '' = any year
+let _feedOrg = '';    // organization name, '' = no org filter
 let _feedLoading = false;
 
-let _allPosts = null;  // cached from local JSON
+let _allPosts = null;   // merged posts from all archive pages, newest-first
+let _archiveManifest = null;
 
-async function _fetchPosts(disc, page, perPage) {
-  if (!_allPosts) {
+async function _ensureManifest() {
+  if (!_archiveManifest) {
     try {
-      const r = await fetch(_LOCAL_POSTS, { cache: 'no-cache' });
-      const d = await r.json();
-      _allPosts = d.posts || [];
+      const r = await fetch(_ARCHIVE_MANIFEST, { cache: 'no-cache' });
+      _archiveManifest = await r.json();
+    } catch { _archiveManifest = { pages: [], organizations: [] }; }
+  }
+  return _archiveManifest;
+}
+
+// Posts are split into page-NNNN.json shards (highest index = newest) so no
+// single file grows past GitHub's 1MB inline-content limit again. Today's
+// archive is small enough to merge fully into memory; once historical posts
+// are backfilled and page count grows, this is the place to fetch only the
+// pages a given date/org filter actually needs instead of all of them.
+async function _ensureAllPosts() {
+  if (!_allPosts) {
+    const manifest = await _ensureManifest();
+    const pages = [...manifest.pages].sort((a, b) => b.index - a.index); // newest page first
+    try {
+      const chunks = await Promise.all(pages.map(p =>
+        fetch('/data/posts/' + p.file, { cache: 'no-cache' }).then(r => r.json())));
+      _allPosts = chunks.flatMap(c => c.posts || []);
     } catch { _allPosts = []; }
   }
+  return _allPosts;
+}
+
+async function _fetchPosts(disc, page, perPage) {
+  await _ensureAllPosts();
   let posts = _allPosts;
   // In EN mode: only show posts that have EN translation
   if (_currentLang === 'en') posts = posts.filter(p => p.has_en);
-  if (disc && disc !== 'all') posts = posts.filter(p => p.discipline === disc);
+  if (disc === 'analysis' || disc === 'history') {
+    posts = posts.filter(p => p.content_category === disc);
+  } else if (disc && disc !== 'all') {
+    posts = posts.filter(p => p.discipline === disc);
+  }
+  if (_feedDay || _feedMonth || _feedYear) {
+    posts = posts.filter(p => {
+      const [y, m, d] = (p.published_at || '').slice(0, 10).split('-');
+      if (!y) return false;
+      if (_feedYear && y !== _feedYear) return false;
+      if (_feedMonth && m !== _feedMonth) return false;
+      if (_feedDay && d !== _feedDay) return false;
+      return true;
+    });
+  }
+  if (_feedOrg) posts = posts.filter(p => p.organization === _feedOrg);
   const start = (page - 1) * perPage;
   return posts.slice(start, start + perPage);
 }
@@ -320,27 +365,9 @@ async function _loadFeed(reset = false) {
   } finally { _feedLoading = false; }
 }
 
-// ── Analysis feed loader ──────────────────────────────────────────────────────
-async function _loadAnalysis() {
-  const container = document.getElementById('analysis-cards');
-  if (!container) return;
-  try {
-    if (!_allPosts) {
-      const r = await fetch(_LOCAL_POSTS, { cache: 'no-cache' });
-      const d = await r.json();
-      _allPosts = d.posts || [];
-    }
-    const posts = _allPosts.slice(0, 3);
-    if (!posts.length) return;
-    container.innerHTML = posts.map(p => _buildCard(p)).join('');
-  } catch { /* keep */ }
-}
-
 // Boot feeds
 _loadFeed(true);
-_loadAnalysis();
 document.getElementById('loadMoreBtn')?.addEventListener('click', () => _loadFeed());
-document.getElementById('loadMoreAnalysisBtn')?.addEventListener('click', () => _loadAnalysis());
 
 // ── Article modal ────────────────────────────────────────────────────────────
 const _modal = document.getElementById('articleModal');
@@ -394,11 +421,39 @@ function _openModal(postId, { pushUrl = true } = {}) {
       .replace(/<a[^>]*>(.*?)<\/a>/gi, '$1')
       .replace(/\n/g, '<br>');
     _modalBody.innerHTML = body;
+
+    const shareUrl = location.origin + '/post/' + postId;
+    const shareTitle = useEN ? (post.title_en || post.title) : (post.title_ru || post.title);
+    const shareEl = document.getElementById('modalShare');
+    if (shareEl) {
+      shareEl.style.display = '';
+      shareEl.dataset.url = shareUrl;
+      const tg = document.getElementById('shareTelegramBtn');
+      if (tg) tg.href = 'https://t.me/share/url?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareTitle || '');
+      const tw = document.getElementById('shareTwitterBtn');
+      if (tw) tw.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareTitle || '');
+      const wa = document.getElementById('shareWhatsappBtn');
+      if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent((shareTitle || '') + ' ' + shareUrl);
+    }
   } else {
     if (modalPhoto) { modalPhoto.classList.add('modal-photo--hidden'); modalPhoto.src = ''; }
     _modalBody.innerHTML = '<p style="color:var(--dim);text-align:center;padding:3rem">Post not found.</p>';
+    const shareEl = document.getElementById('modalShare');
+    if (shareEl) shareEl.style.display = 'none';
   }
 }
+
+document.getElementById('shareCopyBtn')?.addEventListener('click', async () => {
+  const url = document.getElementById('modalShare')?.dataset.url;
+  if (!url) return;
+  const btn = document.getElementById('shareCopyBtn');
+  try {
+    await navigator.clipboard.writeText(url);
+    const original = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(() => { btn.textContent = original; }, 1500);
+  } catch (_) {}
+});
 
 function _closeModal({ pushUrl = true } = {}) {
   _modal.classList.remove('open');
@@ -429,24 +484,170 @@ window.addEventListener('popstate', () => {
   const m = location.pathname.match(/^\/post\/([^/]+)/);
   if (!m) return;
   const postId = m[1];
-  if (!_allPosts) {
-    try {
-      const r = await fetch(_LOCAL_POSTS, { cache: 'no-cache' });
-      const d = await r.json();
-      _allPosts = d.posts || [];
-    } catch { _allPosts = []; }
-  }
+  await _ensureAllPosts();
   _openModal(postId, { pushUrl: false });
 })();
 
 // ── Discipline filter
-document.querySelectorAll('.disc-btn').forEach(btn => {
+// NOTE: only buttons with a real [data-disc] value participate — Fighters/Date/
+// Organization share the .disc-btn class purely for matching visual style, but
+// each opens its own panel/section and must NOT reset the feed to "all".
+document.querySelectorAll('.disc-btn[data-disc]').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.disc-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.disc-btn[data-disc]').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     _feedDisc = btn.dataset.disc || 'all';
     _loadFeed(true);
   });
+});
+
+// ── Header nav discipline links — same filter, scrolls to #feed too
+document.querySelectorAll('.nav-disc-link').forEach(a => {
+  a.addEventListener('click', () => {
+    const disc = a.dataset.disc || 'all';
+    // Discipline lives in the header nav now — the News Feed chip below just
+    // reflects "we're browsing the feed" (vs. Analysis/History/Fighters).
+    document.querySelectorAll('.disc-btn[data-disc]').forEach(b => b.classList.toggle('active', b.dataset.disc === 'all'));
+    _feedDisc = disc;
+    _loadFeed(true);
+  });
+});
+
+// ── Fighters filter chip — jumps to the Fighters search section
+document.getElementById('filterFightersBtn')?.addEventListener('click', () => {
+  document.getElementById('fighters')?.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('searchInput')?.focus();
+});
+
+// ── Custom select — replaces native <select> so the open dropdown matches
+// the site's dark theme (a native <select> popup is OS-chrome and can't be
+// styled). root = the .csel container; onChange fires with the picked value.
+function _cselInit(root, onChange) {
+  if (!root) return;
+  const btn = root.querySelector('.csel-btn');
+  const label = root.querySelector('.csel-label');
+  const menu = root.querySelector('.csel-menu');
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.csel-menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
+    menu.classList.toggle('open');
+  });
+  menu.addEventListener('click', e => {
+    const opt = e.target.closest('.csel-opt');
+    if (!opt) return;
+    const value = opt.dataset.value || '';
+    root.dataset.value = value;
+    label.textContent = opt.textContent;
+    menu.querySelectorAll('.csel-opt').forEach(o => o.classList.toggle('active', o === opt));
+    menu.classList.remove('open');
+    if (onChange) onChange(value);
+  });
+}
+document.addEventListener('click', () => document.querySelectorAll('.csel-menu.open').forEach(m => m.classList.remove('open')));
+
+function _cselValue(id) { return document.getElementById(id)?.dataset.value || ''; }
+
+function _cselAddOption(id, value, text) {
+  document.getElementById(id)?.querySelector('.csel-menu')?.insertAdjacentHTML(
+    'beforeend', `<button type="button" class="csel-opt" data-value="${value}">${text}</button>`);
+}
+
+function _cselReset(id) {
+  const root = document.getElementById(id);
+  if (!root) return;
+  root.dataset.value = '';
+  const defaultOpt = root.querySelector('.csel-opt[data-value=""]');
+  root.querySelectorAll('.csel-opt').forEach(o => o.classList.toggle('active', o === defaultOpt));
+  const label = root.querySelector('.csel-label');
+  if (label && defaultOpt) label.textContent = defaultOpt.textContent;
+}
+
+// Re-sync a dropdown's visible label with its (just re-translated) default
+// option after a language switch — but only while nothing real is picked.
+function _cselRelabelDefaults() {
+  document.querySelectorAll('.csel').forEach(root => {
+    if (root.dataset.value) return;
+    const defaultOpt = root.querySelector('.csel-opt[data-value=""]');
+    const label = root.querySelector('.csel-label');
+    if (label && defaultOpt) label.textContent = defaultOpt.textContent;
+  });
+}
+
+// Month names are language-dependent (mon01..mon12 in i18n.js) — re-render
+// every option's text (values '01'-'12' stay the same) after a language switch.
+function _monthOptionsRelabel() {
+  if (!window.i18n) return;
+  const root = document.getElementById('dateFilterMonth');
+  root?.querySelectorAll('.csel-opt[data-value]').forEach(opt => {
+    if (!opt.dataset.value) return;
+    opt.textContent = window.i18n.t('mon' + opt.dataset.value);
+  });
+  if (root?.dataset.value) {
+    const label = root.querySelector('.csel-label');
+    const active = root.querySelector('.csel-opt.active');
+    if (label && active) label.textContent = active.textContent;
+  }
+}
+
+// Populate day (01-31) and month (01-12) once at boot — fixed ranges, no data dependency.
+for (let d = 1; d <= 31; d++) { const v = String(d).padStart(2, '0'); _cselAddOption('dateFilterDay', v, v); }
+for (let m = 1; m <= 12; m++) {
+  const v = String(m).padStart(2, '0');
+  _cselAddOption('dateFilterMonth', v, window.i18n ? window.i18n.t('mon' + v) : v);
+}
+
+// ── Date filter — day/month/year are independently optional, so you can
+// search by day alone, month alone, year alone, or any combination.
+const dateFilterPanel = document.getElementById('dateFilterPanel');
+const orgFilterPanel = document.getElementById('orgFilterPanel');
+_cselInit(document.getElementById('dateFilterDay'));
+_cselInit(document.getElementById('dateFilterMonth'));
+_cselInit(document.getElementById('dateFilterYear'));
+document.getElementById('filterDateBtn')?.addEventListener('click', async () => {
+  orgFilterPanel?.setAttribute('hidden', '');
+  dateFilterPanel?.toggleAttribute('hidden');
+  const yearMenu = document.getElementById('dateFilterYear')?.querySelector('.csel-menu');
+  if (yearMenu && yearMenu.children.length <= 1) {
+    const manifest = await _ensureManifest();
+    const yearSet = new Set();
+    manifest.pages.forEach(p => {
+      const lo = parseInt((p.min_date || '').slice(0, 4), 10);
+      const hi = parseInt((p.max_date || '').slice(0, 4), 10);
+      if (lo && hi) for (let y = lo; y <= hi; y++) yearSet.add(String(y));
+    });
+    [...yearSet].sort().reverse().forEach(y => _cselAddOption('dateFilterYear', y, y));
+  }
+});
+document.getElementById('dateFilterApply')?.addEventListener('click', () => {
+  _feedDay = _cselValue('dateFilterDay');
+  _feedMonth = _cselValue('dateFilterMonth');
+  _feedYear = _cselValue('dateFilterYear');
+  _loadFeed(true);
+});
+document.getElementById('dateFilterClear')?.addEventListener('click', () => {
+  _feedDay = _feedMonth = _feedYear = '';
+  ['dateFilterDay', 'dateFilterMonth', 'dateFilterYear'].forEach(_cselReset);
+  _loadFeed(true);
+});
+
+// ── Organisation filter — applies immediately on pick (no separate Apply button)
+_cselInit(document.getElementById('orgFilterSelect'), value => {
+  _feedOrg = value;
+  _loadFeed(true);
+});
+document.getElementById('filterOrgBtn')?.addEventListener('click', async () => {
+  dateFilterPanel?.setAttribute('hidden', '');
+  orgFilterPanel?.toggleAttribute('hidden');
+  const menu = document.getElementById('orgFilterSelect')?.querySelector('.csel-menu');
+  if (menu && menu.children.length <= 1) {
+    const manifest = await _ensureManifest();
+    manifest.organizations.forEach(org => _cselAddOption('orgFilterSelect', org, org));
+  }
+});
+document.getElementById('orgFilterClear')?.addEventListener('click', () => {
+  _feedOrg = '';
+  _cselReset('orgFilterSelect');
+  _loadFeed(true);
 });
 
 // ── Fighter search — shows AGON posts about this fighter on-site
@@ -482,11 +683,7 @@ async function doSearch(fighterName) {
   _modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   try {
-    if (!_allPosts) {
-      const r = await fetch(_LOCAL_POSTS, { cache: 'no-cache' });
-      const d = await r.json();
-      _allPosts = d.posts || [];
-    }
+    await _ensureAllPosts();
     const qLow = q.toLowerCase();
     const found = _allPosts.filter(p => {
       const haystack = [
@@ -510,4 +707,58 @@ searchInput?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(
 document.addEventListener('click', e => {
   const fc = e.target.closest('.f-card--clickable');
   if (fc) doSearch(fc.dataset.fighter);
+});
+
+
+const paypalBtn = document.getElementById('paypalBtn');
+if (paypalBtn) paypalBtn.href = 'https://paypal.me/cepinoga';
+
+const tonCopyBtn = document.getElementById('tonCopyBtn');
+tonCopyBtn?.addEventListener('click', async () => {
+  const address = document.getElementById('tonAddress')?.textContent || '';
+  try {
+    await navigator.clipboard.writeText(address);
+    const original = tonCopyBtn.textContent;
+    tonCopyBtn.textContent = window.i18n.t('support_ton_copied');
+    setTimeout(() => { tonCopyBtn.textContent = original; }, 1800);
+  } catch (err) { /* clipboard unavailable — address is still visible to copy manually */ }
+});
+
+// ── Contact form → /api/contact → Telegram (owner) ─────────────────────────
+const contactForm = document.getElementById('contactForm');
+contactForm?.addEventListener('submit', async e => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('contactSubmit');
+  const status = document.getElementById('contactStatus');
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const message = document.getElementById('contactMessage').value.trim();
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = window.i18n.t('contact_sending');
+  status.className = 'contact-status';
+  status.textContent = '';
+
+  try {
+    const r = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message }),
+    });
+    const data = await r.json();
+    if (data.ok) {
+      status.className = 'contact-status ok';
+      status.textContent = window.i18n.t('contact_success');
+      contactForm.reset();
+    } else {
+      status.className = 'contact-status err';
+      status.textContent = window.i18n.t('contact_error');
+    }
+  } catch (err) {
+    status.className = 'contact-status err';
+    status.textContent = window.i18n.t('contact_error');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = window.i18n.t('contact_submit');
+  }
 });

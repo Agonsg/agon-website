@@ -56,7 +56,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/styles.css?v=44"/>
+  <link rel="stylesheet" href="/styles.css?v=46"/>
 </head>
 <body>
 
@@ -79,9 +79,15 @@
     <span class="nav-brand">AGON <span class="pipe">|</span> COMBAT SPORTS</span>
   </a>
   <div class="nav-links">
-    <a href="#feed" data-i18n="nav_feed">News Feed</a>
-    <a href="#analysis" data-i18n="nav_analysis">Analysis</a>
+    <a href="#feed" class="nav-disc-link" data-disc="all" data-i18n="nav_feed">News Feed</a>
+    <a href="#feed" class="nav-disc-link" data-disc="mma">MMA</a>
+    <a href="#feed" class="nav-disc-link" data-disc="boxing">Boxing</a>
+    <a href="#feed" class="nav-disc-link" data-disc="kickboxing">Kickboxing</a>
+    <a href="#feed" class="nav-disc-link" data-disc="muaythai">Muay Thai</a>
+    <a href="#feed" class="nav-disc-link" data-disc="bareknuckle">Bare Knuckle</a>
+    <a href="#feed" class="nav-disc-link" data-disc="grappling">Grappling</a>
     <a href="#fighters" data-i18n="nav_fighters">Fighters</a>
+    <a href="#about" data-i18n="nav_about">About</a>
   </div>
   <div class="nav-right">
     <div class="lang-wrap">
@@ -113,7 +119,7 @@
     </div>
     <img src="/assets/logo.png" alt="AGON" class="hero-logo" id="heroLogoImg"/>
     <h1 class="hero-title">AGON <span class="pipe">|</span> COMBAT SPORTS</h1>
-    <p class="hero-sub" data-i18n="hero_sub">Expert fight analysis · 8 languages · AI-powered intelligence</p>
+    <p class="hero-sub" data-i18n="hero_sub">Combat sports media · Every promotion, every region, 24/7</p>
     <div class="hero-btns">
       <a href="https://t.me/agoncombat" target="_blank" rel="noopener noreferrer" class="btn-primary" data-i18n="hero_btn1">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
@@ -148,13 +154,35 @@
     </div>
     <div class="disc-filter-wrap">
       <div class="disc-filter">
-        <button type="button" class="disc-btn active" data-disc="all" data-i18n="filter_all">All</button>
-        <button type="button" class="disc-btn" data-disc="mma">MMA</button>
-        <button type="button" class="disc-btn" data-disc="boxing">Boxing</button>
-        <button type="button" class="disc-btn" data-disc="kickboxing">Kickboxing</button>
-        <button type="button" class="disc-btn" data-disc="muaythai">Muay Thai</button>
-        <button type="button" class="disc-btn" data-disc="bareknuckle">Bare Knuckle</button>
-        <button type="button" class="disc-btn" data-disc="grappling">Grappling</button>
+        <button type="button" class="disc-btn active" data-disc="all" data-i18n="filter_news_feed">News Feed</button>
+        <button type="button" class="disc-btn disc-btn--special" data-disc="analysis" data-i18n="filter_analysis">✍️ Analysis</button>
+        <button type="button" class="disc-btn disc-btn--special" id="filterFightersBtn" data-i18n="filter_fighters">👤 Fighters</button>
+        <button type="button" class="disc-btn disc-btn--special" data-disc="history" data-i18n="filter_history">📚 History</button>
+        <button type="button" class="disc-btn disc-btn--special" id="filterDateBtn" data-i18n="filter_date">📅 Date</button>
+        <button type="button" class="disc-btn disc-btn--special" id="filterOrgBtn" data-i18n="filter_org">🏢 Organization</button>
+      </div>
+      <div id="dateFilterPanel" class="extra-filter-panel" hidden>
+        <div class="csel" id="dateFilterDay">
+          <button type="button" class="csel-btn"><span class="csel-label" data-i18n="filter_any">Any</span><span class="csel-caret">▾</span></button>
+          <div class="csel-menu"><button type="button" class="csel-opt active" data-value="" data-i18n="filter_any">Any</button></div>
+        </div>
+        <div class="csel" id="dateFilterMonth">
+          <button type="button" class="csel-btn"><span class="csel-label" data-i18n="filter_any">Any</span><span class="csel-caret">▾</span></button>
+          <div class="csel-menu"><button type="button" class="csel-opt active" data-value="" data-i18n="filter_any">Any</button></div>
+        </div>
+        <div class="csel" id="dateFilterYear">
+          <button type="button" class="csel-btn"><span class="csel-label" data-i18n="filter_any">Any</span><span class="csel-caret">▾</span></button>
+          <div class="csel-menu"><button type="button" class="csel-opt active" data-value="" data-i18n="filter_any">Any</button></div>
+        </div>
+        <button type="button" id="dateFilterApply" class="btn-outline" data-i18n="filter_apply">Apply</button>
+        <button type="button" id="dateFilterClear" class="btn-outline" data-i18n="filter_clear">Clear</button>
+      </div>
+      <div id="orgFilterPanel" class="extra-filter-panel" hidden>
+        <div class="csel csel--wide" id="orgFilterSelect">
+          <button type="button" class="csel-btn"><span class="csel-label" data-i18n="filter_org_all">All organisations</span><span class="csel-caret">▾</span></button>
+          <div class="csel-menu"><button type="button" class="csel-opt active" data-value="" data-i18n="filter_org_all">All organisations</button></div>
+        </div>
+        <button type="button" id="orgFilterClear" class="btn-outline" data-i18n="filter_clear">Clear</button>
       </div>
     </div>
     <div class="cards" id="feed-cards">
@@ -202,19 +230,72 @@
   </div>
 </section>
 
-<!-- ═══════ ANALYSIS ═══════ -->
-<section id="analysis" class="section section-dark">
+<!-- ═══════ ABOUT / CONTACT ═══════ -->
+<section id="about" class="section">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag" data-i18n="analysis_tag">EDITORIAL DEPTH</div>
-      <h2 data-i18n="analysis_title">Analysis & Stories</h2>
-      <p data-i18n="analysis_sub">Fight History · Fighter profiles · Deep reads · AGON editorial view</p>
+      <div class="sec-tag" data-i18n="about_tag">GET IN TOUCH</div>
+      <h2 data-i18n="about_title">About & Contact</h2>
+      <p data-i18n="about_sub">Who we are, and how to reach us</p>
     </div>
-    <div class="cards" id="analysis-cards">
-      <div class="feed-loading">Loading...</div>
-    </div>
-    <div class="intel-cta">
-      <button type="button" class="btn-outline" id="loadMoreAnalysisBtn">Load More</button>
+
+    <div class="about-grid">
+      <div class="about-col">
+        <p class="about-body" data-i18n="about_body">AGON | COMBAT SPORTS is an AI-powered combat intelligence platform covering MMA, Boxing, Kickboxing, Muay Thai, Bare Knuckle and Grappling — 24/7, across hundreds of sources worldwide.</p>
+
+        <h3 class="contact-subtitle" data-i18n="contact_direct_title">Direct contact</h3>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label" data-i18n="contact_email_label">Email</span>
+            <a href="mailto:info@agoncombat.com">info@agoncombat.com</a>
+          </li>
+          <li>
+            <span class="contact-label" data-i18n="contact_tg_label">Telegram</span>
+            <a href="https://t.me/Agon_combatbot" target="_blank" rel="noopener noreferrer">@Agon_combatbot</a>
+          </li>
+          <li>
+            <span class="contact-label" data-i18n="contact_tw_label">Twitter / X</span>
+            <a href="https://twitter.com/agoncombat" target="_blank" rel="noopener noreferrer">@agoncombat</a>
+          </li>
+          <li>
+            <span class="contact-label" data-i18n="contact_channel_ru">Channel (RU)</span>
+            <a href="https://t.me/agoncombat" target="_blank" rel="noopener noreferrer">t.me/agoncombat</a>
+          </li>
+          <li>
+            <span class="contact-label" data-i18n="contact_channel_en">Channel (EN)</span>
+            <a href="https://t.me/agoncombat_en" target="_blank" rel="noopener noreferrer">t.me/agoncombat_en</a>
+          </li>
+        </ul>
+
+        <div class="support-box">
+          <h3 class="contact-subtitle" data-i18n="support_title">Support AGON | COMBAT SPORTS</h3>
+          <p data-i18n="support_body">Enjoy the coverage? A small contribution keeps the platform running and ad-free.</p>
+          <a href="#" id="paypalBtn" target="_blank" rel="noopener noreferrer" class="btn-outline" data-i18n="support_paypal">Support via PayPal</a>
+          <div class="ton-wrap">
+            <span class="contact-label" data-i18n="support_ton_label">Telegram Wallet (TON)</span>
+            <div class="ton-qr-row">
+              <img class="ton-qr" width="120" height="120" loading="lazy"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=UQDJG1FapnehdMa3eHQSHA5l_qbRIJLl9S6Quw-A2RJov8oE"
+                   alt="TON wallet QR code">
+              <div class="ton-address-row">
+                <code id="tonAddress">UQDJG1FapnehdMa3eHQSHA5l_qbRIJLl9S6Quw-A2RJov8oE</code>
+                <button type="button" id="tonCopyBtn" class="ton-copy-btn" data-i18n="support_ton_copy">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-col">
+        <form id="contactForm" class="contact-form">
+          <h3 class="contact-subtitle" data-i18n="contact_form_title">Send us a message</h3>
+          <input type="text" id="contactName" name="name" data-i18n-placeholder="contact_name_ph" placeholder="Your name" required maxlength="120"/>
+          <input type="email" id="contactEmail" name="email" data-i18n-placeholder="contact_email_ph" placeholder="Your email" required maxlength="200"/>
+          <textarea id="contactMessage" name="message" data-i18n-placeholder="contact_message_ph" placeholder="Your message" required maxlength="2000" rows="5"></textarea>
+          <button type="submit" id="contactSubmit" class="btn-primary" data-i18n="contact_submit">Send Message</button>
+          <div id="contactStatus" class="contact-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -228,6 +309,13 @@
     <div class="modal-content">
       <div class="modal-meta" id="modalMeta"></div>
       <div class="modal-body" id="modalBody"></div>
+      <div class="modal-share" id="modalShare">
+        <span class="modal-share-label" data-i18n="share_label">Share:</span>
+        <button type="button" class="share-btn" id="shareCopyBtn" title="Copy link">🔗</button>
+        <a class="share-btn" id="shareTelegramBtn" target="_blank" rel="noopener noreferrer" title="Telegram">✈️</a>
+        <a class="share-btn" id="shareTwitterBtn" target="_blank" rel="noopener noreferrer" title="X / Twitter">🐦</a>
+        <a class="share-btn" id="shareWhatsappBtn" target="_blank" rel="noopener noreferrer" title="WhatsApp">💬</a>
+      </div>
       <div class="modal-footer">
         <a href="https://t.me/agoncombat" target="_blank" rel="noopener noreferrer" class="btn-outline">Follow @agoncombat →</a>
       </div>
@@ -244,9 +332,9 @@
 <div id="cursor"></div>
 <div id="cursorDot"></div>
 
-<script src="/intro.js?v=44"></script>
-<script src="/app.js?v=44"></script>
-<script src="/game.js?v=44"></script>
-<script src="/i18n.js?v=44"></script>
+<script src="/intro.js?v=46"></script>
+<script src="/i18n.js?v=46"></script>
+<script src="/app.js?v=46"></script>
+<script src="/game.js?v=46"></script>
 </body>
 </html>
